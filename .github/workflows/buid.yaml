@@ -5,7 +5,7 @@ on:
 
 env:
   REGISTRY: ghcr.io
-  IMAGE_NAME: ${{ github.repository }}
+  REPOSITORY: ${{ github.repository }}
 
 jobs:
   build-and-push-image:
@@ -32,7 +32,7 @@ jobs:
           password: ${{ secrets.GITHUB_TOKEN }}
 
       - name: Build singleton
-        run: scala-cli --power package --docker singleton.sc --docker-image-repository ${{ env.REGISTRY }}/singleton
+        run: scala-cli --power package --docker singleton.sc --docker-image-repository ${{ env.REGISTRY }}/${{ env.REPOSITORY }}/singleton
 
       - name: Push singleton
-        run: docker push ${{env.REGISTRY}}/singleton
+        run: docker push ${{env.REGISTRY}}/${{ env.REPOSITORY }}/singleton
