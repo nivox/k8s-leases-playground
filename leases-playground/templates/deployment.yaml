@@ -1,0 +1,22 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: {{ include "leases-playground.fullname" . }}-singleton
+  labels:
+    {{- include "leases-playground.labels" . | nindent 4 }}
+spec:
+  selector:
+    matchLabels:
+      {{- include "leases-playground.selectorLabels" . | nindent 6 }}
+  template:
+    metadata:
+      labels:
+        {{- include "leases-playground.selectorLabels" . | nindent 8 }}
+    spec:
+      serviceAccountName: leases-playground-sa
+      containers:
+        - name: {{ .Chart.Name }}-singleton
+          image: "ghcr.io/nivox/k8s-leases-playground/singleton"
+          imagePullPolicy: Always
+          resources:
+            {{- toYaml .Values.resources | nindent 12 }}
