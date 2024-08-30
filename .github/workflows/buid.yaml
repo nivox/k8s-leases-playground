@@ -32,7 +32,7 @@ jobs:
           password: ${{ secrets.GITHUB_TOKEN }}
 
       - name: Build singleton
-        run: scala-cli --power package --docker signleton.sc --docker-image-repository ${{ env.REGISTRY }}/singleton
+        run: scala-cli --power package --docker singleton.sc --docker-image-repository ${{ env.REGISTRY }}/singleton
 
       - name: Push singleton
         run: docker push ${{env.REGISTRY}}/singleton
