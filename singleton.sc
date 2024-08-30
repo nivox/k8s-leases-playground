@@ -26,4 +26,6 @@ val lease = V1Lease()
       .leaseDurationSeconds(30)
   )
 
-coordApi.createNamespacedLease(namespace, lease)
+val res = coordApi.createNamespacedLease(namespace, lease).execute()
+println("Lease created")
+println(res.toJson())
