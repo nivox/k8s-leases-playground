@@ -13,7 +13,7 @@ val client = Config.defaultClient()
 Configuration.setDefaultApiClient(client)
 
 val namespace = sys.env.getOrElse("TARGET_NAMESPACE", "default")
-val podName = sys.env.getOrElse("POD_NAME", throw new IllegalArgumentException("POD_NAME env var is required"))
+val podName = sys.env.getOrElse("HOSTNAME", throw new IllegalArgumentException("HOSTNAME env var is required"))
 
 val coordApi = new CoordinationV1Api()
 val lease = V1Lease()
